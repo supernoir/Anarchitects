@@ -1,0 +1,25 @@
+{
+  "name": "anarchitects",
+  "version": "0.0.1",
+  "description": "- [threejs](http://threejs.org/) - [Voxel Painter](http://threejs.org/examples/#canvas_interactive_voxelpainter)",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supernoir/Anarchitects.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supernoir/Anarchitects/issues"
+  },
+  "homepage": "https://github.com/supernoir/Anarchitects#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "node": "0.0.0"
+  }
+}
