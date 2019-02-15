@@ -1,22 +1,34 @@
 <?php
 
-class Board {
+include './messages/Message.php';
+use Messenger;
 
+class Board {
+  
   public function renderBoard()
   {
-    echo '<div class="col-8">';
-      echo '<div class="card">';
-        echo '<h3 class="card-header">'. 'Board'  .'</h3>';
-        echo '<div class="card-body">';
-          echo '<ul>';
-            echo '<li>' . self::projectPlots(99,100) . '</li>';
-          echo '</ul>';
-          echo '<hr/>';
-          echo '<a href="#" class="btn btn-primary">Next Turn</a>';
+    $element = NULL;
+    $elementName = 'Board';
 
-        echo '</div>';
-      echo '</div>';
-    echo '</div>';
+    $element .= '<div class="col-8">';
+      $element .= '<div class="card">';
+        $element .= '<h3 class="card-header">'. $elementName  .'</h3>';
+        $element .= '<div class="card-body">';
+          $element .= '<ul>';
+            $element .= '<li>' . self::projectPlots(99,100) . '</li>';
+          $element .= '</ul>';
+          $element .= '<hr/>';
+          $element .= '<a href="#" class="btn btn-primary">Next Turn</a>';
+
+        $element .= '</div>';
+      $element .= '</div>';
+    $element .= '</div>';
+    
+    if(isset($element)){
+      echo $element;
+    } else {
+      echo Messenger\Message::render('error','Could not load ' . $elementName);
+    }
   }
 
   protected function projectPlots($maxPlots, $totalPlots)
