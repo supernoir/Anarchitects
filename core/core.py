@@ -1,14 +1,18 @@
+# CONSTANTS
 initialBalance = 100
 initialPlotPrice = 25
 initialPlotCount = 1
 
+# GLOBALS
+playerName = "Player1"
 playerBalance = initialBalance
 playerPlots = initialPlotCount
 plotPrice = initialPlotPrice
-playerName = "Player1"
-
 totalPlots = 1000
+currentTurn = 1
 
+# WIN STATES
+maxTurns = 1000
 
 def getPlayerName(name: str):
     print(f'Player name: {name}')
@@ -26,6 +30,10 @@ def startGame():
 
 
 def getPlayerStatus():
+    global playerName
+    global playerPlots
+    global totalPlots
+    global playerBalance
     print(
         f'{playerName} has {playerPlots}/{totalPlots} plots and an account balance of {playerBalance}'
     )
@@ -46,13 +54,29 @@ def purchasePlot(balance: float, plots: int):
         plots + 1
         totalPlots - 1
         playerPlots = plots
-        print(balance, plots, totalPlots)
+        print(playerBalance, playerPlots, totalPlots)
         sendUserMessage("Plot purchase successful")
     else:
         sendUserMessage("Plot purchase failed. Insufficient funds")
 
+def endTurn(turn):
+    global maxTurns
+    global currentTurn
+    turn = currentTurn
+    if turn < maxTurns:
+        turn + 1
+        getPlayerStatus()
+        print(f"Turn {turn} ended")
+    else:
+        killScreen("You ran out of time")
+
+def killScreen(reason):
+    print(f"Game Over! {reason}")
 
 startGame()
 purchasePlot(playerBalance, playerPlots)
 print(playerBalance)
 getPlayerStatus()
+endTurn(currentTurn)
+purchasePlot(playerBalance, playerPlots)
+endTurn(currentTurn)
