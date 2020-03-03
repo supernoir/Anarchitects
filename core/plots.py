@@ -1,8 +1,12 @@
-class PlotController:
+class Plot:
     availablePlots = 100
     startingPlot = 1
 
-    def hasRemainingPlots(self, takenPlots, availablePlots):
+    def __init__(self, takenplots, availableplots):
+        self.takenPlots = takenplots
+        self.availablePlots = availableplots
+
+    def hasremainingplots(self, takenPlots, availablePlots):
         hasPlots = False
         if (takenPlots > availablePlots):
             hasPlots = True
