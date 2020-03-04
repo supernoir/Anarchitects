@@ -1,6 +1,6 @@
 from random import randint
 
-from core.authority.permittype import PermitType
+from core.Permits.permittype import PermitType
 
 
 class Permit:
