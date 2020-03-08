@@ -3,7 +3,6 @@
 import json
 
 from flask_sqlalchemy import SQLAlchemy
-
 from config import app
 
 db = SQLAlchemy(app)
@@ -11,7 +10,7 @@ db = SQLAlchemy(app)
 
 class Building(db.Model):
     __tablename__ = 'buildings'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     value = db.Column(db.Float, nullable=False)
 

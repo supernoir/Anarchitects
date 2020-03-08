@@ -1,14 +1,24 @@
-def displayTurn(turnCount, currentTurn):
-    print(f'You are on turn {currentTurn} of {turnCount} so far.')
+class Turn:
 
-def displayCompetitors(players):
-    print (", ".join(player for player in players))
+    def __init__(self, total_turns, current_turn):
+        self.total_turns = total_turns
+        self.current_turn = current_turn
 
-def displayRemainingPlots(plotCount):
-    # hasRemainingPlots = PlotController.hasRemainingPlots(plotCount)
-    hasRemainingPlots = True
-    if (hasRemainingPlots):
-        remainingPlots = "There are {plotCount} plots remaining".format(plotCount)
-    else:
-        remainingPlots = 'There are no remaining plots to build on'
-    return remainingPlots
+    def next_turn(self):
+        self.current_turn = self.current_turn + 1
+        return self.current_turn
+
+    def kill_screen(self, reason: str) -> object:
+        return self.kill_screen(reason)
+
+    def end_turn(self) -> bool:
+        if self.current_turn < self.total_turns:
+            print(f"Turn {self.current_turn} ended")
+            self.current_turn = self.current_turn + 1
+            return True
+        else:
+            self.kill_screen("You ran out of time")
+            return False
+
+    def display_turn(self) -> None:
+        print(f'You are on turn {self.current_turn} of {self.total_turns - self.current_turn} so far.')
