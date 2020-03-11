@@ -3,6 +3,7 @@ import json
 import uuid
 
 from flask import jsonify, request, Response
+from flask_cors import cross_origin
 
 from config import app
 from model_building import Building
@@ -26,6 +27,7 @@ def get_player():
 
 
 @app.route('/buildings')
+@cross_origin(supports_credentials=False)
 def get_buildings():
     return jsonify({'buildings': bldg.get_all_buildings()})
 
@@ -40,7 +42,6 @@ def validBuildingObject(buildingObject):
     if (
             "name" in buildingObject
             and "value" in buildingObject
-            and "id" in buildingObject
     ):
         return True
     else:
@@ -53,8 +54,8 @@ def add_building():
     if validBuildingObject(request_data):
         new_building_id = uuid.uuid4()
         bldg.add_building(new_building_id, request_data["name"], request_data["value"])
-        response = Response("", 201, mimetype="application/json")
-        response.headers['Location'] = "/buildings/" + str(request_data["id"])
+        response = Response({'buildings': bldg.get_all_buildings()}, 201, mimetype="application/json")
+        response.headers['Location'] = "/buildings/" + str(new_building_id)
         return response
     else:
         invalid_building_error_msg = {
@@ -72,4 +73,5 @@ def update_building(id):
     response = Response("", status=204)
     return response
 
-app.run(port=5000)
+
+app.run(host='0.0.0.0', port=5000, debug=True)
